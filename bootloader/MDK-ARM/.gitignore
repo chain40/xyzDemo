@@ -1,0 +1,8 @@
+/bootloader/
+/DebugConfig/
+/RTE/
+/EventRecorderStub.scvd
+/JLinkLog.txt
+/JLinkSettings.ini
+/bootloader.uvguix.chain40
+*.lst
