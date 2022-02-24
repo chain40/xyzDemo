@@ -72,10 +72,7 @@ bool bSplRecv(void *pvDst, uint16_t *pusDstSize, uint16_t usExpectSize) {
     status = HAL_UART_Receive(&huart2, (uint8_t *)pusDstSize, sizeof(*pusDstSize), 1000);
     if (status != HAL_OK) {
         return false;    
-    }
-    if (*pusDstSize > usExpectSize) {
-        return false;
-    }
+    }    
     
     status = HAL_UART_Receive(&huart2, (uint8_t *)pvDst, *pusDstSize, 1000);
     if (status != HAL_OK) {

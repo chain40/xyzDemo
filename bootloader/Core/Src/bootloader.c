@@ -136,23 +136,48 @@ __EXIT:
 }
 
 static uint32_t prvDfuSegDataReq(void *pvDst, uint32_t ulBase, uint32_t ulSize) {
-    uint32_t dfu_seg_dat_req = DFU_SEG_DATA_REQ;
-    HAL_UART_Transmit(&huart2, (uint8_t *)&dfu_seg_dat_req, sizeof(dfu_seg_dat_req), 1000);
-    HAL_StatusTypeDef status = HAL_UART_Receive(&huart2, (uint8_t *)pvDst, ulSize, 1000);
-    if (status != HAL_OK) {
-        return ulSize - huart2.RxXferCount;
+    struct __attribute__((packed)) {
+        uint16_t usReqID;
+        uint32_t ulOffset;
+        uint32_t ulSize;
+    } xSegDatReq = {
+        .usReqID = DFU_SEG_DATA_REQ,
+        .ulOffset = ulBase,
+        .ulSize = ulSize
+    };
+    
+    if (bSplSend(&xSegDatReq, sizeof(xSegDatReq)) == false) {
+        return false;
     }
-    return ulSize;       
+
+    uint16_t recv_size = 0;
+    if (bSplRecv(pvDst, &recv_size, ulSize) == false) {
+        return false;
+    }    
+    
+    return recv_size;       
 }
 
 static uint32_t prvDfuSegChkSumReq(uint32_t ulBase, uint32_t ulSize) {
-    uint32_t dfu_seg_chksum_req = DFU_SEG_CHKSUM_REQ;
-    uint32_t dfu_seg_chksum = 0;
-    HAL_UART_Transmit(&huart2, (uint8_t *)&dfu_seg_chksum_req, sizeof(dfu_seg_chksum_req), 1000);
-    HAL_StatusTypeDef status = HAL_UART_Receive(&huart2, (uint8_t *)&dfu_seg_chksum, sizeof(dfu_seg_chksum), 1000);
-    if (status != HAL_OK) {
-        return 0;
+    struct __attribute__((packed)) {
+        uint16_t usReqID;
+        uint32_t ulOffset;
+        uint32_t ulSize;
+    } xSegDatReq = {
+        .usReqID = DFU_SEG_CHKSUM_REQ,
+        .ulOffset = ulBase,
+        .ulSize = ulSize
+    };
+    
+    if (bSplSend(&xSegDatReq, sizeof(xSegDatReq)) == false) {
+        return false;
     }
+
+    uint16_t dfu_seg_chksum = 0;
+    uint16_t recv_size = 0;
+    if (bSplRecv(&dfu_seg_chksum, &recv_size, sizeof(dfu_seg_chksum)) == false) {
+        return false;
+    }        
     return dfu_seg_chksum;   
 }
 
