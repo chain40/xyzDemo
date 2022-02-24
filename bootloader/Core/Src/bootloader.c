@@ -62,8 +62,8 @@ static bool prvEnterDfuMode(void) {
 #define DFU_START_REQ       0x5555
 #define DFU_SIZE_REQ        0x0001 
 #define DFU_CHKSUM_REQ      0x0002 
-#define DFU_SEG_CHKSUM_REQ  0x0003
-#define DFU_SEG_DATA_REQ    0x0004
+#define DFU_SEG_DATA_REQ    0x0003
+#define DFU_SEG_CHKSUM_REQ  0x0004
 
 static bool prvDfuStartReq(void) {
     #define DFU_START_RSP 0xCC33
@@ -135,6 +135,16 @@ __EXIT:
     return ret;
 }
 
+static uint32_t prvDfuSegDataReq(void *pvDst, uint32_t ulBase, uint32_t ulSize) {
+    uint32_t dfu_seg_dat_req = DFU_SEG_DATA_REQ;
+    HAL_UART_Transmit(&huart2, (uint8_t *)&dfu_seg_dat_req, sizeof(dfu_seg_dat_req), 1000);
+    HAL_StatusTypeDef status = HAL_UART_Receive(&huart2, (uint8_t *)pvDst, ulSize, 1000);
+    if (status != HAL_OK) {
+        return ulSize - huart2.RxXferCount;
+    }
+    return ulSize;       
+}
+
 static uint32_t prvDfuSegChkSumReq(uint32_t ulBase, uint32_t ulSize) {
     uint32_t dfu_seg_chksum_req = DFU_SEG_CHKSUM_REQ;
     uint32_t dfu_seg_chksum = 0;
@@ -144,16 +154,6 @@ static uint32_t prvDfuSegChkSumReq(uint32_t ulBase, uint32_t ulSize) {
         return 0;
     }
     return dfu_seg_chksum;   
-}
-
-static uint32_t prvDfuSegDataReq(void *pvDst, uint32_t ulBase, uint32_t ulSize) {
-    uint32_t dfu_seg_dat_req = DFU_SEG_DATA_REQ;
-    HAL_UART_Transmit(&huart2, (uint8_t *)&dfu_seg_dat_req, sizeof(dfu_seg_dat_req), 1000);
-    HAL_StatusTypeDef status = HAL_UART_Receive(&huart2, (uint8_t *)pvDst, ulSize, 1000);
-    if (status != HAL_OK) {
-        return ulSize - huart2.RxXferCount;
-    }
-    return ulSize;       
 }
 
 static uint32_t prvDfuChkSumCal(void *pvDst, uint32_t ulSize) {
