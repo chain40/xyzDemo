@@ -101,12 +101,18 @@ static uint32_t prvDfuSizeReq(void) {
 }
 
 static uint32_t prvDfuChkSumReq(void) {
-    uint32_t dfu_chksum_req = DFU_CHKSUM_REQ;
-    uint32_t dfu_chksum = 0;
-    HAL_UART_Transmit(&huart2, (uint8_t *)&dfu_chksum_req, sizeof(dfu_chksum_req), 1000);
-    HAL_StatusTypeDef status = HAL_UART_Receive(&huart2, (uint8_t *)&dfu_chksum, sizeof(dfu_chksum), 1000);
-    if (status != HAL_OK) {
-        return 0;
+    uint16_t dfu_chksum_req = DFU_CHKSUM_REQ;
+    if (bSplSend(&dfu_chksum_req, sizeof(dfu_chksum_req)) == false) {
+        return false;
+    }
+
+    uint16_t dfu_chksum = 0;
+    uint16_t recv_size = 0;
+    if (bSplRecv(&dfu_chksum, &recv_size, sizeof(dfu_chksum)) == false) {
+        return false;
+    }    
+    if (recv_size != sizeof(dfu_chksum)) {
+        return false;
     }
     return dfu_chksum;
 }

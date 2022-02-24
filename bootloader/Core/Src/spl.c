@@ -43,7 +43,7 @@ bool bSplSend(void *pvSrc, uint16_t usSize) {
         return false;
     }
     
-    status =  HAL_UART_Transmit(&huart2, (uint8_t *)&pvSrc, usSize, 1000);
+    status =  HAL_UART_Transmit(&huart2, (uint8_t *)pvSrc, usSize, 1000);
     if (status != HAL_OK) {
         return false;
     }
