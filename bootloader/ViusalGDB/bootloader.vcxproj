@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClCompile Include="..\Core\Src\bootloader.c" />
     <ClCompile Include="..\Core\Src\main.c" />
+    <ClCompile Include="..\Core\Src\spl.c" />
     <ClCompile Include="..\Core\Src\stm32f4xx_it.c" />
     <ClCompile Include="..\Core\Src\stm32f4xx_hal_msp.c" />
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_crc.c" />
@@ -101,6 +102,7 @@
     <ClCompile Include="..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c" />
     <ClCompile Include="..\Core\Src\system_stm32f4xx.c" />
     <ClCompile Include="..\MDK-ARM\startup_stm32f412rx.s" />
+    <ClInclude Include="..\Core\Inc\spl.h" />
     <None Include="mcu.props" />
     <ClInclude Include="$(BSP_ROOT)\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h" />
     <None Include="ViusalGDB-Debug.vgdbsettings" />
