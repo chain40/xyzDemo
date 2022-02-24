@@ -156,5 +156,13 @@
     <ClCompile Include="..\MDK-ARM\startup_stm32f412rx.s">
       <Filter>Source files\Device-specific files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Core\Src\spl.c">
+      <Filter>Source files\Application\User\Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Core\Inc\spl.h">
+      <Filter>Header files\Application\User\Core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

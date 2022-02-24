@@ -27,7 +27,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\MDK-ARM\bootloader.uvprojx</RelativePath>
-        <Timestamp>132901414098088069</Timestamp>
+        <Timestamp>132901924696913652</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -56,6 +56,9 @@
                     </VirtualFileSnapshot>
                     <VirtualFileSnapshot>
                       <RelativePath>..\Core\Src\stm32f4xx_hal_msp.c</RelativePath>
+                    </VirtualFileSnapshot>
+                    <VirtualFileSnapshot>
+                      <RelativePath>..\Core\Src\spl.c</RelativePath>
                     </VirtualFileSnapshot>
                   </Files>
                 </VirtualDirectorySnapshot>
