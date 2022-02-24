@@ -12,7 +12,7 @@
  * | Reserved      |  16KB | 0x08004000 ~ 0x08007FFF   | use Flash sector 1				|  
  * | DFU		   | 244KB | 0x08008000 ~ 0x0803FFFF   | use Flash sector 2, 3, 4, 5    |
  * | Applicartion  | 256KB | 0x08040000 ~ 0x0807FFFF   | use Flash sector 6, 7			| 
- * | BCB Magic     | 256 B | 0x2001FFFC ~ 0x2001FFFF   | use on-chip SRAM				|
+ * | BCB Magic     |   4 B | 0x2001FFFC ~ 0x2001FFFF   | use on-chip SRAM				|
  * ---------------------------------------------------------------------------------------
  **/
 
