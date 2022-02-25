@@ -14,7 +14,7 @@
 extern UART_HandleTypeDef huart2;
 
 /*
- *  SPL format: [preamble][data size][data][check sum]
+ *  SPL format: [preamble][payload size][payload][check sum]
  *  [preamble]: 2 bytes
  *  [payload size]: 2 bytes
  *  [payload]: n bytes
