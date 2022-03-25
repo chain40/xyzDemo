@@ -1,7 +1,6 @@
 #include "main.h"
 #include "stm32f412rx.h"
 #include "cmsis_armcc.h"
-#include "spl.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
