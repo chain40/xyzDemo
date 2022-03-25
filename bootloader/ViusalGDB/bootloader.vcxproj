@@ -47,15 +47,15 @@
       <CLanguageStandard>
       </CLanguageStandard>
       <AdditionalIncludeDirectories>..\Core\Inc;..\Drivers\STM32F4xx_HAL_Driver\Inc;..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\Drivers\CMSIS\Include;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>DEBUG=1;$$com.sysprogs.bspoptions.primary_memory$$_layout;USE_HAL_DRIVER;STM32F412Rx;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <PreprocessorDefinitions>DEBUG=1;USE_HAL_DRIVER;STM32F412Rx;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>--c99 --gnu</AdditionalOptions>
       <CPPLanguageStandard />
       <AdditionalCOptions>--c99</AdditionalCOptions>
     </ClCompile>
     <Link>
-      <AdditionalLinkerInputs>%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
+      <AdditionalLinkerInputs>;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
       <AdditionalOptions />
+      <LinkerScript />
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
@@ -108,5 +108,6 @@
     <None Include="ViusalGDB-Debug.vgdbsettings" />
     <None Include="ViusalGDB-Release.vgdbsettings" />
     <None Include="MCU.xml" />
+    <ClCompile Include="..\Core\Src\crc16.c" />
   </ItemGroup>
 </Project>
